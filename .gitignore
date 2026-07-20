@@ -1,0 +1,37 @@
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
+
+# Python & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+
+# SQLite Database
+*.db
+agenthive.db
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node / Frontend (if applicable)
+node_modules/
+dist/
+.next/
+
+# Logs
+*.log
+logs/
+
+# Caches & Storage
+.crewai_storage/
+.pytest_cache/
+.tiktoken_cache/

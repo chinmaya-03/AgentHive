@@ -1,0 +1,32 @@
+SOFTWARE REQUIREMENT SPECIFICATION (SRS)
+PROJECT: E-Commerce Microservices AI Platform
+
+1. SYSTEM OVERVIEW & SCOPE
+The E-Commerce Microservices AI Platform is a high-availability online retail ecosystem.
+The platform requires user authentication, microservices architecture, automated inventory webhooks, Stripe payment integration, real-time stock management, and AI-driven personalized product recommendations.
+
+2. CORE MODULES & FUNCTIONAL REQUIREMENTS
+
+MODULE 1: USER AUTHENTICATION & PROFILE MANAGEMENT
+- FR-1.1: Implement JWT multi-factor authentication for customer registration, login, and password resets.
+- FR-1.2: Support RBAC (Role-Based Access Control) for Customers, Store Managers, and System Administrators.
+- FR-1.3: Store encrypted user passwords using bcrypt with salt rounds >= 12.
+
+MODULE 2: PRODUCT CATALOG & SEARCH ENGINE
+- FR-2.1: Provide REST API endpoints to CRUD products, categories, tags, and variants.
+- FR-2.2: Integrate PostgreSQL full-text search and Elasticsearch index for sub-50ms product query latency.
+- FR-2.3: Support bulk product updates via CSV upload.
+
+MODULE 3: SHOPPING CART & CHECKOUT PIPELINE
+- FR-3.1: Maintain real-time customer shopping session cart state stored in Redis.
+- FR-3.2: Integrate Stripe API for secure credit card processing, digital wallets (Apple Pay/Google Pay), and refund processing.
+- FR-3.3: Calculate order subtotal, sales tax dynamically based on shipping ZIP code, and shipping rates.
+
+MODULE 4: INVENTORY & ORDER FULFILLMENT WEBHOOKS
+- FR-4.1: Broadcast inventory reservation events to RabbitMQ queues upon cart checkout.
+- FR-4.2: Implement webhook handlers for warehouse inventory updates and automated stock re-ordering triggers.
+- FR-4.3: Generate automated email and SMS delivery tracking updates to customers upon dispatch.
+
+MODULE 5: AI RECOMMENDATION ENGINE & TELEMETRY
+- FR-5.1: Collect real-time user browsing telemetry events and process them using a streaming data pipeline.
+- FR-5.2: Serve personalized product recommendations on product detail pages and checkout screens.
