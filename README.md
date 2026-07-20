@@ -10,7 +10,6 @@ AgentHive is an open-source, full-stack application that transforms raw Software
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
 [![CrewAI](https://img.shields.io/badge/CrewAI-1.6-FF4B4B?style=flat-square&logo=openai&logoColor=white)](https://www.crewai.com/)
 [![Database](https://img.shields.io/badge/Database-SQLite%20%2F%20PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)](https://www.sqlalchemy.org/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
 
 ---
 
