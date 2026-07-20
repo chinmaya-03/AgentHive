@@ -30,7 +30,6 @@ AgentHive is an open-source, full-stack application that transforms raw Software
 - [API Reference](#-api-reference)
 - [Testing](#-testing)
 - [Roadmap & Future Enhancements](#-roadmap--future-enhancements)
-- [License](#-license)
 
 ---
 
