@@ -339,6 +339,3 @@ The test suite validates authentication endpoints, user registration, JWT lifecy
 
 ---
 
-## 📜 License
-
-Distributed under the **MIT License**. See `LICENSE` for details.
