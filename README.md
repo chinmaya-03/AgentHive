@@ -1,6 +1,6 @@
 # AgentHive 
 
-> **Multi-Agent AI Sprint Planning Assistant **
+> **Multi-Agent AI Sprint Planning Assistant**
 
 AgentHive is an open-source, full-stack application that transforms raw Software Requirement Specifications (SRS) into structured, role-matched, balanced sprint plans using a coordinated pipeline of **5 specialized CrewAI agents**.
 
