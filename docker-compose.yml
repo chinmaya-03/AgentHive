@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  # Relational database for production deployment (optional, update DATABASE_URL in backend config to use it)
+  # db:
+  #   image: postgres:15-alpine
+  #   restart: always
+  #   environment:
+  #     POSTGRES_USER: agenthive
+  #     POSTGRES_PASSWORD: agenthive_secure_password
+  #     POSTGRES_DB: agenthive
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: always
+    env_file:
+      - ./backend/.env
+    # environment:
+    #   - DATABASE_URL=postgresql://agenthive:agenthive_secure_password@db:5432/agenthive
+    volumes:
+      - ./backend/uploads:/app/uploads
+      - backend_db_data:/app/db_dir # To persist SQLite database if not using PostgreSQL
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        # Change this during build if the backend API is deployed at a different host/domain
+        - VITE_API_URL=http://localhost:8000/api/v1
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
+  backend_db_data:

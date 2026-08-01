@@ -66,6 +66,8 @@ class AIServiceProvider:
             if not model_name.startswith("gemini/"):
                 model_name = f"gemini/{model_name}"
             
+            os.environ["GEMINI_API_KEY"] = api_key
+
             return LLM(
                 model=model_name,
                 api_key=api_key,

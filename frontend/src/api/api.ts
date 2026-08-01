@@ -1,7 +1,11 @@
 import axios from 'axios';
 
 // Access API url from Vite environment or fall back to localhost FastAPI
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1';
+const API_URL = import.meta.env.VITE_API_URL || 
+  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:8000/api/v1'
+    : 'https://agenthive-backend.onrender.com/api/v1');
+
 
 const api = axios.create({
   baseURL: API_URL,

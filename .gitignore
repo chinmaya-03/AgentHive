@@ -35,3 +35,8 @@ logs/
 .crewai_storage/
 .pytest_cache/
 .tiktoken_cache/
+
+# Uploaded documents
+backend/uploads/*
+!backend/uploads/.gitkeep
+

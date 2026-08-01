@@ -85,22 +85,31 @@ class CoordinatorAgent:
         Runs a CrewAI crew with exponential backoff retry on RateLimitError.
         Waits up to BASE_BACKOFF * 2^attempt seconds between retries.
         """
-        import litellm
         last_exc = None
         for attempt in range(MAX_RETRIES):
             try:
                 return crew.kickoff()
-            except litellm.exceptions.RateLimitError as e:
-                last_exc = e
-                wait = BASE_BACKOFF * (2 ** attempt)  # 15s, 30s, 60s, 120s
-                logger.warning(
-                    f"RateLimitError on attempt {attempt + 1}/{MAX_RETRIES}. "
-                    f"Waiting {wait}s before retry... ({str(e)[:120]})"
-                )
-                time.sleep(wait)
             except Exception as e:
-                raise e
-        raise last_exc
+                # Catch any rate limit exception dynamically (LiteLLM, Groq, or 429 string matching)
+                is_rate_limit = (
+                    "RateLimit" in e.__class__.__name__ or 
+                    "RateLimitError" in e.__class__.__name__ or
+                    "rate limit" in str(e).lower() or
+                    "429" in str(e)
+                )
+                if is_rate_limit and attempt < MAX_RETRIES - 1:
+                    last_exc = e
+                    wait = BASE_BACKOFF * (2 ** attempt)  # 15s, 30s, 60s, 120s
+                    logger.warning(
+                        f"RateLimitError on attempt {attempt + 1}/{MAX_RETRIES}. "
+                        f"Waiting {wait}s before retry... ({str(e)[:120]})"
+                    )
+                    time.sleep(wait)
+                else:
+                    raise e
+        if last_exc:
+            raise last_exc
+
 
     def execute_pipeline(self) -> Dict[str, Any]:
         """

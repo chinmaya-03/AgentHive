@@ -41,9 +41,10 @@ const ControlCenter: React.FC = () => {
       .then((res) => {
         dispatch(setAiLogs(res.data));
         const isRunning = res.data.some((log: any) => log.status === 'Running');
-        const isPending = res.data.some((log: any) => log.status === 'Pending');
+        const hasFailed = res.data.some((log: any) => log.status === 'Failed');
+        const isPending = res.data.some((log: any) => log.status === 'Pending') && !hasFailed;
         
-        if (!isRunning && !isPending && res.data.length > 0) {
+        if (!isRunning && !isPending) {
           setGenerating(false);
           setPollingActive(false);
         }
@@ -61,8 +62,10 @@ const ControlCenter: React.FC = () => {
 
   useEffect(() => {
     if (aiLogs && aiLogs.length > 0) {
-      const isRunning = aiLogs.some((l) => l.status === 'Running' || l.status === 'Pending');
-      if (isRunning) {
+      const isRunning = aiLogs.some((l) => l.status === 'Running');
+      const hasFailed = aiLogs.some((l) => l.status === 'Failed');
+      const isPending = aiLogs.some((l) => l.status === 'Pending') && !hasFailed;
+      if (isRunning || isPending) {
         startPolling();
       }
     } else {
