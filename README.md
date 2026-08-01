@@ -1,4 +1,4 @@
-# AgentHive 🐝
+# AgentHive 
 
 > **Multi-Agent AI Sprint Planning Assistant & Virtual PMO**
 
